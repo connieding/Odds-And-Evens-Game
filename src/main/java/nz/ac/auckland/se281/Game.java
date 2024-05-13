@@ -21,11 +21,17 @@ public class Game {
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
     roundNumber++;
 
-    MessageCli.ASK_INPUT.printMessage();
-    String input = Utils.scanner.nextLine();
+    while (true) {
+      MessageCli.ASK_INPUT.printMessage();
+      String input = Utils.scanner.nextLine();
 
-    MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
-    MessageCli.INVALID_INPUT.printMessage();
+      if (0 <= Integer.parseInt(input) && Integer.parseInt(input) <= 5) {
+        MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
+        break;
+      }
+
+      MessageCli.INVALID_INPUT.printMessage();
+    }
   }
 
   public void endGame() {}
