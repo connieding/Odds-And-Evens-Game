@@ -22,6 +22,9 @@ public class Game {
     roundNumber++;
 
     MessageCli.ASK_INPUT.printMessage();
+    String input = Utils.scanner.nextLine();
+
+    MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
   }
 
   public void endGame() {}
