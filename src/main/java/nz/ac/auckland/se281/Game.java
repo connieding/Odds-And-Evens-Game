@@ -25,6 +25,7 @@ public class Game {
     String input = Utils.scanner.nextLine();
 
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
+    MessageCli.INVALID_INPUT.printMessage();
   }
 
   public void endGame() {}
