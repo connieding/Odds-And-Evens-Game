@@ -12,8 +12,8 @@ public class Game {
   int playerFingers;
   int aiFingers;
   String playerName;
-  Strategy strategy;
   AiTurn aiTurn;
+  Difficulty gameDifficulty;
   Choice playerChoice;
   List<Choice> history = new ArrayList<>();
 
@@ -21,12 +21,14 @@ public class Game {
     // the first element of options[0]; is the name of the player
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
 
-    playerName = options[0]; // set player name
-    roundNumber = 1; // reset round
-    playerChoice = choice;
-    history.clear(); // clear arraylist
+    // reset game
+    history.clear();
+    roundNumber = 1;
 
-    strategy = GameDifficulty.setDifficulty(difficulty);
+    // set game preferences
+    gameDifficulty = difficulty;
+    playerName = options[0];
+    playerChoice = choice;
   }
 
   public void play() {
@@ -43,8 +45,10 @@ public class Game {
         MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
         // Ai move
-        aiTurn = new AiTurn(strategy, playerChoice, history);
-        aiFingers = aiTurn.playFingers(roundNumber);
+        aiTurn = GameDifficulty.setDifficulty(gameDifficulty, playerChoice, history, roundNumber);
+        // aiTurn = new AiTurn(strategy, playerChoice, history);
+        aiFingers = aiTurn.playFingers();
+
         MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiFingers));
 
         // record players choice of number
