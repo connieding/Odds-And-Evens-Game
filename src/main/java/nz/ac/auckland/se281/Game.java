@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
@@ -13,6 +15,7 @@ public class Game {
   Strategy strategy;
   AiTurn aiTurn;
   Choice choice;
+  List<Choice> history = new ArrayList<>();
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -23,12 +26,10 @@ public class Game {
     this.choice = choice;
 
     strategy = GameDifficulty.setDifficulty(difficulty);
-    aiTurn = new AiTurn(strategy);
   }
 
   public void play() {
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
-    roundNumber++;
 
     while (true) {
       MessageCli.ASK_INPUT.printMessage();
@@ -41,8 +42,16 @@ public class Game {
         MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
         // Ai move
-        aiFingers = aiTurn.playFingers();
+        aiTurn = new AiTurn(strategy, choice, history);
+        aiFingers = aiTurn.playFingers(roundNumber);
         MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiFingers));
+
+        // record players choice of number
+        if (Utils.isEven(playerFingers)) {
+          history.add(Choice.EVEN);
+        } else {
+          history.add(Choice.ODD);
+        }
 
         // check winner of the round
         int sum = playerFingers + aiFingers;
@@ -62,6 +71,7 @@ public class Game {
           }
         }
 
+        roundNumber++;
         break;
       }
 

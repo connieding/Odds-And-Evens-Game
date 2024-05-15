@@ -9,8 +9,10 @@ public class GameDifficulty {
       case EASY:
         return new RandomStrategy();
 
-      default:
-        break;
+      case MEDIUM:
+        return new TopStrategy(null, null);
+
+      case HARD:
     }
     return null;
   }
