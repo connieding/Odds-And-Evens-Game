@@ -14,7 +14,7 @@ public class Game {
   String playerName;
   Strategy strategy;
   AiTurn aiTurn;
-  Choice choice;
+  Choice playerChoice;
   List<Choice> history = new ArrayList<>();
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
@@ -23,7 +23,8 @@ public class Game {
 
     playerName = options[0]; // set player name
     roundNumber = 1; // reset round
-    this.choice = choice;
+    playerChoice = choice;
+    history.clear(); // clear arraylist
 
     strategy = GameDifficulty.setDifficulty(difficulty);
   }
@@ -42,7 +43,7 @@ public class Game {
         MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
         // Ai move
-        aiTurn = new AiTurn(strategy, choice, history);
+        aiTurn = new AiTurn(strategy, playerChoice, history);
         aiFingers = aiTurn.playFingers(roundNumber);
         MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiFingers));
 
@@ -56,14 +57,14 @@ public class Game {
         // check winner of the round
         int sum = playerFingers + aiFingers;
         if (Utils.isEven(sum)) {
-          if (choice == Choice.EVEN) {
+          if (playerChoice == Choice.EVEN) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", playerName);
 
           } else {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", "HAL-9000");
           }
         } else {
-          if (choice == Choice.ODD) {
+          if (playerChoice == Choice.ODD) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", playerName);
 
           } else {
