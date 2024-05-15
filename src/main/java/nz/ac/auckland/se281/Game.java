@@ -138,6 +138,8 @@ public class Game {
     } else {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
+
+    gameStarted = false;
   }
 
   public void showStats() {
