@@ -13,7 +13,8 @@ public class Game {
   int aiFingers;
   String playerName;
   String previousWinner;
-  String nextStrategy = "Random";
+  String nextStrategy;
+  Boolean gameStarted = false;
   AiTurn aiTurn;
   Difficulty gameDifficulty;
   Choice playerChoice;
@@ -26,14 +27,23 @@ public class Game {
     // reset game
     history.clear();
     roundNumber = 1;
+    nextStrategy = "Random";
 
     // set game preferences
     gameDifficulty = difficulty;
     playerName = options[0];
     playerChoice = choice;
+
+    gameStarted = true;
   }
 
   public void play() {
+    // Check if game has been created
+    if (!gameStarted) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
 
     while (true) {
