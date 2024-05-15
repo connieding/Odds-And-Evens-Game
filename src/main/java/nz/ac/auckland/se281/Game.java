@@ -30,6 +30,8 @@ public class Game {
     history.clear();
     roundNumber = 1;
     nextStrategy = "Random";
+    playerWins = 0;
+    aiWins = 0;
 
     // set game preferences
     gameDifficulty = difficulty;
@@ -136,5 +138,10 @@ public class Game {
     if (!gameStarted) {
       MessageCli.GAME_NOT_STARTED.printMessage();
     }
+
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        playerName, Integer.toString(playerWins), Integer.toString(aiWins));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        "HAL-9000", Integer.toString(aiWins), Integer.toString(playerWins));
   }
 }
