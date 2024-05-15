@@ -131,6 +131,10 @@ public class Game {
   public void endGame() {
     showStats();
 
+    if (!gameStarted) {
+      return;
+    }
+
     if (playerWins < aiWins) {
       MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
     } else if (playerWins > aiWins) {
@@ -145,6 +149,7 @@ public class Game {
   public void showStats() {
     if (!gameStarted) {
       MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
     }
 
     MessageCli.PRINT_PLAYER_WINS.printMessage(
