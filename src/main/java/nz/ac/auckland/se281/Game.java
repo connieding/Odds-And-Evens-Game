@@ -12,13 +12,15 @@ public class Game {
   String playerName;
   Strategy strategy;
   AiTurn aiTurn;
+  Choice choice;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
 
-    playerName = options[0];
+    playerName = options[0]; // set player name
     roundNumber = 1; // reset round
+    this.choice = choice;
 
     strategy = GameDifficulty.setDifficulty(difficulty);
     aiTurn = new AiTurn(strategy);
@@ -41,6 +43,24 @@ public class Game {
         // Ai move
         aiFingers = aiTurn.playFingers();
         MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiFingers));
+
+        // check winner of the round
+        int sum = playerFingers + aiFingers;
+        if (Utils.isEven(sum)) {
+          if (choice == Choice.EVEN) {
+            MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", playerName);
+
+          } else {
+            MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", "HAL-9000");
+          }
+        } else {
+          if (choice == Choice.ODD) {
+            MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", playerName);
+
+          } else {
+            MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", "HAL-9000");
+          }
+        }
 
         break;
       }
