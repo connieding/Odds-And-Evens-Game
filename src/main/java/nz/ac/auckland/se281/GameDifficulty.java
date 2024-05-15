@@ -11,7 +11,8 @@ public class GameDifficulty {
       Choice playerChoice,
       List<Choice> history,
       int roundNumber,
-      String previousWinner) {
+      String previousWinner,
+      String nextStrategy) {
     switch (difficulty) {
       case EASY:
         return new EasyAi();
@@ -20,7 +21,7 @@ public class GameDifficulty {
         return new MediumAi(playerChoice, history, roundNumber);
 
       case HARD:
-        return new HardAi(playerChoice, history, roundNumber, previousWinner);
+        return new HardAi(playerChoice, history, roundNumber, previousWinner, nextStrategy);
     }
     return null;
   }

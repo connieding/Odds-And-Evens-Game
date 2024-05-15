@@ -8,13 +8,20 @@ public class HardAi implements AiTurn {
   List<Choice> history;
   int roundNumber;
   String previousWinner;
+  String nextStrategy;
   private Strategy strategy;
 
-  public HardAi(Choice choice, List<Choice> history, int roundNumber, String previousWinner) {
+  public HardAi(
+      Choice choice,
+      List<Choice> history,
+      int roundNumber,
+      String previousWinner,
+      String nextStrategy) {
     playerChoice = choice;
     this.history = history;
     this.roundNumber = roundNumber;
     this.previousWinner = previousWinner;
+    this.nextStrategy = nextStrategy;
   }
 
   public void setStrategy(Strategy strategy) {
@@ -23,10 +30,18 @@ public class HardAi implements AiTurn {
 
   @Override
   public int playFingers() {
-    setStrategy(new RandomStrategy());
 
-    if (roundNumber == 4) {
-      setStrategy(new TopStrategy(playerChoice, history));
+    if (roundNumber <= 3) {
+      setStrategy(new RandomStrategy());
+    }
+
+    // if the previous winner is the player, then the AI will use different strategy
+    if (3 < roundNumber) {
+      if (nextStrategy.equals("Random")) {
+        setStrategy(new RandomStrategy());
+      } else {
+        setStrategy(new TopStrategy(playerChoice, history));
+      }
     }
 
     return strategy.aiStrategy();

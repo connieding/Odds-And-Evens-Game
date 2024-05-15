@@ -13,6 +13,7 @@ public class Game {
   int aiFingers;
   String playerName;
   String previousWinner;
+  String nextStrategy = "Random";
   AiTurn aiTurn;
   Difficulty gameDifficulty;
   Choice playerChoice;
@@ -48,7 +49,8 @@ public class Game {
         // Ai move
         aiTurn =
             GameDifficulty.setDifficulty(
-                gameDifficulty, playerChoice, history, roundNumber, previousWinner);
+                gameDifficulty, playerChoice, history, roundNumber, previousWinner, nextStrategy);
+
         aiFingers = aiTurn.playFingers();
 
         MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiFingers));
@@ -67,6 +69,15 @@ public class Game {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", playerName);
             previousWinner = playerName;
 
+            // if the player wins previous rounds, the AI will change strategy
+            if (roundNumber >= 3 && gameDifficulty == Difficulty.HARD) {
+              if (nextStrategy.equals("Random")) {
+                nextStrategy = "Top";
+              } else {
+                nextStrategy = "Random";
+              }
+            }
+
           } else {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", "HAL-9000");
             previousWinner = "HAL-9000";
@@ -75,6 +86,15 @@ public class Game {
           if (playerChoice == Choice.ODD) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", playerName);
             previousWinner = playerName;
+
+            // if the player wins previous rounds, the AI will change strategy
+            if (roundNumber >= 3 && gameDifficulty == Difficulty.HARD) {
+              if (nextStrategy.equals("Random")) {
+                nextStrategy = "Top";
+              } else {
+                nextStrategy = "Random";
+              }
+            }
 
           } else {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", "HAL-9000");
