@@ -30,6 +30,28 @@ public class TopStrategy implements Strategy {
       }
     }
 
+    if (evenTimes > oddTimes) {
+      if (aiChoice == Choice.EVEN) {
+        // ai need even number (even + even = even)
+        return Utils.getRandomEvenNumber();
+
+      } else {
+        // ai need odd number (even + odd = odd)
+        return Utils.getRandomOddNumber();
+      }
+    }
+
+    if (evenTimes < oddTimes) {
+      if (aiChoice == Choice.EVEN) {
+        // ai need odd number (odd + odd = even)
+        return Utils.getRandomOddNumber();
+
+      } else {
+        // ai need even number (odd + even = odd)
+        return Utils.getRandomEvenNumber();
+      }
+    }
+
     // return Utils.getRandomEvenNumber();
     return Utils.getRandomNumberRange(0, 5);
   }
