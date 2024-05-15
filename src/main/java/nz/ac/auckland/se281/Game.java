@@ -12,6 +12,7 @@ public class Game {
   int playerFingers;
   int aiFingers;
   String playerName;
+  String previousWinner;
   AiTurn aiTurn;
   Difficulty gameDifficulty;
   Choice playerChoice;
@@ -45,8 +46,9 @@ public class Game {
         MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
         // Ai move
-        aiTurn = GameDifficulty.setDifficulty(gameDifficulty, playerChoice, history, roundNumber);
-        // aiTurn = new AiTurn(strategy, playerChoice, history);
+        aiTurn =
+            GameDifficulty.setDifficulty(
+                gameDifficulty, playerChoice, history, roundNumber, previousWinner);
         aiFingers = aiTurn.playFingers();
 
         MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiFingers));
@@ -63,16 +65,20 @@ public class Game {
         if (Utils.isEven(sum)) {
           if (playerChoice == Choice.EVEN) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", playerName);
+            previousWinner = playerName;
 
           } else {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", "HAL-9000");
+            previousWinner = "HAL-9000";
           }
         } else {
           if (playerChoice == Choice.ODD) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", playerName);
+            previousWinner = playerName;
 
           } else {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", "HAL-9000");
+            previousWinner = "HAL-9000";
           }
         }
 
