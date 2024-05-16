@@ -6,6 +6,7 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class GameDifficulty {
 
+  // Create AI instances based on the difficulty level given by the player
   public static AiTurn setDifficulty(
       Difficulty difficulty,
       Choice playerChoice,

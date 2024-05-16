@@ -13,6 +13,7 @@ public class Game {
   private int aiFingers;
   private int playerWins = 0;
   private int aiWins = 0;
+  private int sum;
   private String playerName;
   private String nextStrategy;
   private Boolean gameStarted = false;
@@ -49,6 +50,7 @@ public class Game {
 
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
 
+    // Game Loop until the player enters a valid input
     while (true) {
       MessageCli.ASK_INPUT.printMessage();
       String input = Utils.scanner.nextLine();
@@ -76,8 +78,9 @@ public class Game {
         }
 
         // check winner of the round
-        int sum = playerFingers + aiFingers;
+        sum = playerFingers + aiFingers;
         if (Utils.isEven(sum)) {
+          // if the sum is even, and the player chose even, the player wins
           if (playerChoice == Choice.EVEN) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", playerName);
             playerWins++;
@@ -92,10 +95,13 @@ public class Game {
             }
 
           } else {
+            // if the sum is even, and the player chose odd, the AI wins
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", "HAL-9000");
             aiWins++;
           }
+
         } else {
+          // if the sum is odd, and the player chose odd, the player wins
           if (playerChoice == Choice.ODD) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", playerName);
             playerWins++;
@@ -110,11 +116,13 @@ public class Game {
             }
 
           } else {
+            // if the sum is odd, and the player chose even, the AI wins
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", "HAL-9000");
             aiWins++;
           }
         }
 
+        // Update to the next round
         roundNumber++;
         break;
       }
@@ -124,12 +132,15 @@ public class Game {
   }
 
   public void endGame() {
+    // Print the stats of the game
     showStats();
 
+    // Check if game has been created
     if (!gameStarted) {
       return;
     }
 
+    // Check who won the most games
     if (playerWins < aiWins) {
       MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
     } else if (playerWins > aiWins) {
@@ -138,15 +149,18 @@ public class Game {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
 
+    // Reset game
     gameStarted = false;
   }
 
   public void showStats() {
+    // Check if game has been created
     if (!gameStarted) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
 
+    // Print the number of wins for the player and the AI
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         playerName, Integer.toString(playerWins), Integer.toString(aiWins));
     MessageCli.PRINT_PLAYER_WINS.printMessage(
