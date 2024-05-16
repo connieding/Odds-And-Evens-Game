@@ -4,8 +4,8 @@ import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
 
 public class TopStrategy implements Strategy {
-  List<Choice> history;
-  Choice aiChoice;
+  private List<Choice> history;
+  private Choice aiChoice;
 
   public TopStrategy(Choice playerChoice, List<Choice> history) {
     this.history = history;

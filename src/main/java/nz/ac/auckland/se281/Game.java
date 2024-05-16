@@ -8,19 +8,18 @@ import nz.ac.auckland.se281.Main.Difficulty;
 /** This class represents the Game is the main entry point. */
 public class Game {
 
-  int roundNumber = 1;
-  int playerFingers;
-  int aiFingers;
-  int playerWins = 0;
-  int aiWins = 0;
-  String playerName;
-  String previousWinner;
-  String nextStrategy;
-  Boolean gameStarted = false;
-  AiTurn aiTurn;
-  Difficulty gameDifficulty;
-  Choice playerChoice;
-  List<Choice> history = new ArrayList<>();
+  private int roundNumber = 1;
+  private int playerFingers;
+  private int aiFingers;
+  private int playerWins = 0;
+  private int aiWins = 0;
+  private String playerName;
+  private String nextStrategy;
+  private Boolean gameStarted = false;
+  private AiTurn aiTurn;
+  private Difficulty gameDifficulty;
+  private Choice playerChoice;
+  private List<Choice> history = new ArrayList<>();
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -63,7 +62,7 @@ public class Game {
         // Ai move
         aiTurn =
             GameDifficulty.setDifficulty(
-                gameDifficulty, playerChoice, history, roundNumber, previousWinner, nextStrategy);
+                gameDifficulty, playerChoice, history, roundNumber, nextStrategy);
 
         aiFingers = aiTurn.playFingers();
 
@@ -81,7 +80,6 @@ public class Game {
         if (Utils.isEven(sum)) {
           if (playerChoice == Choice.EVEN) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", playerName);
-            previousWinner = playerName;
             playerWins++;
 
             // if the player wins previous rounds, the AI will change strategy
@@ -95,13 +93,11 @@ public class Game {
 
           } else {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", "HAL-9000");
-            previousWinner = "HAL-9000";
             aiWins++;
           }
         } else {
           if (playerChoice == Choice.ODD) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", playerName);
-            previousWinner = playerName;
             playerWins++;
 
             // if the player wins previous rounds, the AI will change strategy
@@ -115,7 +111,6 @@ public class Game {
 
           } else {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", "HAL-9000");
-            previousWinner = "HAL-9000";
             aiWins++;
           }
         }

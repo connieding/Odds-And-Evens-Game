@@ -4,23 +4,16 @@ import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
 
 public class HardAi implements AiTurn {
-  Choice playerChoice;
-  List<Choice> history;
-  int roundNumber;
-  String previousWinner;
-  String nextStrategy;
+  private Choice playerChoice;
+  private List<Choice> history;
+  private int roundNumber;
+  private String nextStrategy;
   private Strategy strategy;
 
-  public HardAi(
-      Choice choice,
-      List<Choice> history,
-      int roundNumber,
-      String previousWinner,
-      String nextStrategy) {
+  public HardAi(Choice choice, List<Choice> history, int roundNumber, String nextStrategy) {
     playerChoice = choice;
     this.history = history;
     this.roundNumber = roundNumber;
-    this.previousWinner = previousWinner;
     this.nextStrategy = nextStrategy;
   }
 
