@@ -1,10 +1,10 @@
 package nz.ac.auckland.se281;
 
-/** Easy AI class */
+/** Easy AI class. */
 public class EasyAi implements AiTurn {
   private Strategy strategy;
 
-  /** Constructor for the Easy level Ai */
+  /** Constructor for the Easy level Ai. */
   public EasyAi() {
     setStrategy(new RandomStrategy());
   }

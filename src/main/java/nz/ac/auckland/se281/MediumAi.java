@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
 
-/** Medium AI class */
+/** Medium AI Class. */
 public class MediumAi implements AiTurn {
   private Choice playerChoice;
   private List<Choice> history;
@@ -40,6 +40,7 @@ public class MediumAi implements AiTurn {
    */
   @Override
   public int playFingers() {
+    // If the round number is less than or equal to 3, the AI will use the Random strategy.
     if (3 < roundNumber) {
       setStrategy(new TopStrategy(playerChoice, history));
     } else {

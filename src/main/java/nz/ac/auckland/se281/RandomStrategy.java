@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-/** Random Strategy class */
+/** Random Strategy class. */
 public class RandomStrategy implements Strategy {
 
   /**

@@ -26,22 +26,22 @@ public class Game {
    * This method creates a new game with the given player difficulty and choice, and resetting and
    * clearing data from previous games.
    *
-   * @param difficulty Enum of the difficulty level (EASY, MEDIUM or HARD) of the AI set by Player
-   * @param choice Enum of the choice (EVEN or ODD) set by Player
-   * @param options Array of strings containing the name of the player
+   * @param difficulty Enum of the difficulty level (EASY, MEDIUM or HARD) of the AI set by Player.
+   * @param choice Enum of the choice (EVEN or ODD) set by Player.
+   * @param options Array of strings containing the name of the player.
    */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
-    // the first element of options[0]; is the name of the player
+    // the first element of options[0]; is the name of the player.
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
 
-    // reset game
+    // reset game.
     history.clear();
     roundNumber = 1;
     nextStrategy = "Random";
     playerWins = 0;
     aiWins = 0;
 
-    // set game preferences
+    // set game preferences.
     gameDifficulty = difficulty;
     playerName = options[0];
     playerChoice = choice;
@@ -56,7 +56,7 @@ public class Game {
    * round will be determined.
    */
   public void play() {
-    // Check if game has been created
+    // Check if game has been created.
     if (!gameStarted) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
@@ -64,18 +64,18 @@ public class Game {
 
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
 
-    // Game Loop until the player enters a valid input
+    // Game Loop until the player enters a valid input.
     while (true) {
       MessageCli.ASK_INPUT.printMessage();
       String input = Utils.scanner.nextLine();
 
       if (Utils.isInteger(input) && 0 <= Integer.parseInt(input) && Integer.parseInt(input) <= 5) {
 
-        // Player move
+        // Player move.
         playerFingers = Integer.parseInt(input);
         MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
-        // Ai move
+        // Ai move.
         aiTurn =
             GameDifficulty.setDifficulty(
                 gameDifficulty, playerChoice, history, roundNumber, nextStrategy);
@@ -84,22 +84,22 @@ public class Game {
 
         MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiFingers));
 
-        // record players choice of number
+        // record players choice of number.
         if (Utils.isEven(playerFingers)) {
           history.add(Choice.EVEN);
         } else {
           history.add(Choice.ODD);
         }
 
-        // check winner of the round
+        // check winner of the round.
         sum = playerFingers + aiFingers;
         if (Utils.isEven(sum)) {
-          // if the sum is even, and the player chose even, the player wins
+          // if the sum is even, and the player chose even, the player wins.
           if (playerChoice == Choice.EVEN) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", playerName);
             playerWins++;
 
-            // if the player wins previous rounds, the AI will change strategy
+            // if the player wins previous rounds, the AI will change strategy.
             if (roundNumber >= 3 && gameDifficulty == Difficulty.HARD) {
               if (nextStrategy.equals("Random")) {
                 nextStrategy = "Top";
@@ -109,18 +109,18 @@ public class Game {
             }
 
           } else {
-            // if the sum is even, and the player chose odd, the AI wins
+            // if the sum is even, and the player chose odd, the AI wins.
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "EVEN", "HAL-9000");
             aiWins++;
           }
 
         } else {
-          // if the sum is odd, and the player chose odd, the player wins
+          // if the sum is odd, and the player chose odd, the player wins.
           if (playerChoice == Choice.ODD) {
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", playerName);
             playerWins++;
 
-            // if the player wins previous rounds, the AI will change strategy
+            // if the player wins previous rounds, the AI will change strategy.
             if (roundNumber >= 3 && gameDifficulty == Difficulty.HARD) {
               if (nextStrategy.equals("Random")) {
                 nextStrategy = "Top";
@@ -130,13 +130,13 @@ public class Game {
             }
 
           } else {
-            // if the sum is odd, and the player chose even, the AI wins
+            // if the sum is odd, and the player chose even, the AI wins.
             MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), "ODD", "HAL-9000");
             aiWins++;
           }
         }
 
-        // Update to the next round
+        // Update to the next round.
         roundNumber++;
         break;
       }
@@ -147,18 +147,18 @@ public class Game {
 
   /**
    * This method ends the game by printing the statisitcs of the rounds and prints the final winner
-   * who has won the most rounds
+   * who has won the most rounds.
    */
   public void endGame() {
-    // Print the stats of the game
+    // Print the stats of the game.
     showStats();
 
-    // Check if game has been created
+    // Check if game has been created.
     if (!gameStarted) {
       return;
     }
 
-    // Check who won the most games
+    // Check who won the most games.
     if (playerWins < aiWins) {
       MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
     } else if (playerWins > aiWins) {
@@ -167,7 +167,7 @@ public class Game {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
 
-    // Reset game
+    // Reset game.
     gameStarted = false;
   }
 
@@ -176,13 +176,13 @@ public class Game {
    * game currently running.
    */
   public void showStats() {
-    // Check if game has been created
+    // Check if game has been created.
     if (!gameStarted) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
 
-    // Print the number of wins for the player and the AI
+    // Print the number of wins for the player and the AI.
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         playerName, Integer.toString(playerWins), Integer.toString(aiWins));
     MessageCli.PRINT_PLAYER_WINS.printMessage(

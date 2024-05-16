@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
 
-/** Top Strategy class */
+/** Top Strategy class. */
 public class TopStrategy implements Strategy {
   private List<Choice> history;
   private Choice aiChoice;
@@ -28,7 +28,7 @@ public class TopStrategy implements Strategy {
    * This method for AI strategy, Top Strategy, monitors how frequently the player has input even
    * and odd numbers. Based on this data, the strategy predicts what the player will likely continue
    * favoring based on the most frequently chosen type of number (ODD or EVEN) and adapts its own
-   * approach accordingly. .
+   * approach accordingly.
    *
    * @return int representing the number of fingers between 0 and 5 inclusive played by the AI.
    */
@@ -49,11 +49,11 @@ public class TopStrategy implements Strategy {
     // If the player has chosen even numbers more frequently than odd numbers.
     if (evenTimes > oddTimes) {
       if (aiChoice == Choice.EVEN) {
-        // ai need even number (even + even = even)
+        // ai need even number (even + even = even).
         return Utils.getRandomEvenNumber();
 
       } else {
-        // ai need odd number (even + odd = odd)
+        // ai need odd number (even + odd = odd).
         return Utils.getRandomOddNumber();
       }
     }
@@ -61,11 +61,11 @@ public class TopStrategy implements Strategy {
     // If the player has chosen odd numbers more frequently than even numbers.
     if (evenTimes < oddTimes) {
       if (aiChoice == Choice.EVEN) {
-        // ai need odd number (odd + odd = even)
+        // ai need odd number (odd + odd = even).
         return Utils.getRandomOddNumber();
 
       } else {
-        // ai need even number (odd + even = odd)
+        // ai need even number (odd + even = odd).
         return Utils.getRandomEvenNumber();
       }
     }

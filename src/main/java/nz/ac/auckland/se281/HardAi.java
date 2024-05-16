@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
 
-/** Hard AI class */
+/** Hard AI class. */
 public class HardAi implements AiTurn {
   private Choice playerChoice;
   private List<Choice> history;
@@ -49,7 +49,8 @@ public class HardAi implements AiTurn {
       setStrategy(new RandomStrategy());
     }
 
-    // If the round number is greater than 3, the AI will switch to the next strategy.
+    // If the round number is greater than 3, the AI will switch to the next strategy depending on
+    // previous winner.
     if (3 < roundNumber) {
       if (nextStrategy.equals("Random")) {
         setStrategy(new RandomStrategy());

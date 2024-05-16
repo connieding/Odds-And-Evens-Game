@@ -4,10 +4,11 @@ import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
+/** Class to set the difficulty level of the AI. */
 public class GameDifficulty {
 
   /**
-   * Create AI instances based on the difficulty level given by the player.
+   * This method create AI instances based on the difficulty level given by the player.
    *
    * @param difficulty Enum of the difficulty level (EASY, MEDIUM or HARD) of the AI set by Player.
    * @param playerChoice Enum of the choice (EVEN or ODD) set by Player.
@@ -23,6 +24,7 @@ public class GameDifficulty {
       int roundNumber,
       String nextStrategy) {
 
+    // Creates AI instances based on the difficulty level given by the player.
     switch (difficulty) {
       case EASY:
         return new EasyAi();
