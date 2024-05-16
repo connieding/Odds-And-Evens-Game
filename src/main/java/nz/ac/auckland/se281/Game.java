@@ -23,8 +23,8 @@ public class Game {
   private List<Choice> history = new ArrayList<>();
 
   /**
-   * This method creates a new game with the given player difficulty and choice, and resetting and
-   * clearing data from previous games.
+   * This method creates a new game by welcoming the player and then clears data stored from
+   * previous games before setting the players preferences of difficulty and choice.
    *
    * @param difficulty Enum of the difficulty level (EASY, MEDIUM or HARD) of the AI set by Player.
    * @param choice Enum of the choice (EVEN or ODD) set by Player.
@@ -51,9 +51,9 @@ public class Game {
 
   /**
    * This method initiated the game by showing the current round number and asks the player for
-   * number of fingers, line. After the Human player has provided a valid argument in the command
-   * line, the AI will generate a random number of fingers based on difficulty and the winner of the
-   * round will be determined.
+   * number of fingers. After the Human player has provided a valid argument in the command line,
+   * the AI will generate a random number of fingers based on player difficulty preference and the
+   * winner of the round will be determined.
    */
   public void play() {
     // Check if game has been created.
