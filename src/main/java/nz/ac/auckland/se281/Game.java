@@ -22,6 +22,14 @@ public class Game {
   private Choice playerChoice;
   private List<Choice> history = new ArrayList<>();
 
+  /**
+   * This method creates a new game with the given player difficulty and choice, and resetting and
+   * clearing data from previous games.
+   *
+   * @param difficulty Enum of the difficulty level (EASY, MEDIUM or HARD) of the AI set by Player
+   * @param choice Enum of the choice (EVEN or ODD) set by Player
+   * @param options Array of strings containing the name of the player
+   */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
@@ -41,6 +49,12 @@ public class Game {
     gameStarted = true;
   }
 
+  /**
+   * This method initiated the game by showing the current round number and asks the player for
+   * number of fingers, line. After the Human player has provided a valid argument in the command
+   * line, the AI will generate a random number of fingers based on difficulty and the winner of the
+   * round will be determined.
+   */
   public void play() {
     // Check if game has been created
     if (!gameStarted) {
@@ -131,6 +145,10 @@ public class Game {
     }
   }
 
+  /**
+   * This method ends the game by printing the statisitcs of the rounds and prints the final winner
+   * who has won the most rounds
+   */
   public void endGame() {
     // Print the stats of the game
     showStats();
@@ -153,6 +171,10 @@ public class Game {
     gameStarted = false;
   }
 
+  /**
+   * This method prints the total number of rounds won and lost by the player and AI when there is a
+   * game currently running.
+   */
   public void showStats() {
     // Check if game has been created
     if (!gameStarted) {
