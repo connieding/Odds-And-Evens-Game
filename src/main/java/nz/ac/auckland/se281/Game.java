@@ -54,6 +54,8 @@ public class Game {
    * number of fingers. After the Human player has provided a valid argument in the command line,
    * the AI will generate a random number of fingers based on player difficulty preference and the
    * winner of the round will be determined.
+   *
+   * @return void if the game has not been started
    */
   public void play() {
     // Check if game has been created.
@@ -147,7 +149,9 @@ public class Game {
 
   /**
    * This method ends the game by printing the statisitcs of the rounds and prints the final winner
-   * who has won the most rounds.
+   * who has won the most rounds. It will also reset the game to allow for a new game to be created.
+   *
+   * @return void if the game has not been started
    */
   public void endGame() {
     // Print the stats of the game.
@@ -173,7 +177,10 @@ public class Game {
 
   /**
    * This method prints the total number of rounds won and lost by the player and AI when there is a
-   * game currently running.
+   * game currently running. If the game has not been started, it will print a message indicating
+   * that the game has not been started.
+   *
+   * @return void if the game has not been started
    */
   public void showStats() {
     // Check if game has been created.
