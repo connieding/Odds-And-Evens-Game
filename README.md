@@ -10,16 +10,16 @@ The Odds and Evens Game is a Java-based application where users can play against
 
 ## Installation
 
-To get started with the Event Venue Booking System, make sure you have **Java** installed on your machine. 
+To get started with the Odds And Evens Game make sure you have **Java** installed on your machine. 
 Follow the steps below to set up and run the project:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/The-Venue-Hire-System.git
+   git clone https://github.com/your-username/Odds-And-Evens-Game.git
 
 2. **Navigate to the project directory**:
    ```bash   
-   cd The-Venue-Hire-System
+   cd Odds-And-Evens-Game
    
 3. **Compile and Run the application**:
    ```bash  
